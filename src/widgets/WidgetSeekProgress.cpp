@@ -80,7 +80,13 @@ void VlcWidgetSeekProgress::wheelEvent(QWheelEvent *event)
     if (!_vlcMediaPlayer)
         return;
 
-    if (event->delta() > 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    int delta = event->delta();
+#else
+    int delta = event->angleDelta().y();
+#endif
+
+    if (delta > 0)
         _vlcMediaPlayer->setTime(_vlcMediaPlayer->time() + _vlcMediaPlayer->length() * 0.01);
     else
         _vlcMediaPlayer->setTime(_vlcMediaPlayer->time() - _vlcMediaPlayer->length() * 0.01);

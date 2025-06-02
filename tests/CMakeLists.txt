@@ -24,11 +24,11 @@ MACRO(ADD_AUTO_TEST TestName)
 
     ADD_EXECUTABLE(Test_${TestName} ${Test_${TestName}_Srcs})
     ADD_DEPENDENCIES(Test_${TestName} ${VLCQT_CORE})
-    TARGET_LINK_LIBRARIES(Test_${TestName} Qt5::Core Qt5::Test ${VLCQT_CORE})
+    TARGET_LINK_LIBRARIES(Test_${TestName} Qt${QT_VERSION}::Core Qt${QT_VERSION}::Test ${VLCQT_CORE})
 
     IF(${TestName} MATCHES "Qml")
         ADD_DEPENDENCIES(Test_${TestName} ${VLCQT_QML})
-        TARGET_LINK_LIBRARIES(Test_${TestName} Qt5::QuickTest ${VLCQT_QML})
+        TARGET_LINK_LIBRARIES(Test_${TestName} Qt${QT_VERSION}::QuickTest ${VLCQT_QML})
         IF(STATIC)
             TARGET_LINK_LIBRARIES(Test_${TestName} ${VLCQT_PLUGIN_QML})
         ENDIF()
@@ -36,7 +36,7 @@ MACRO(ADD_AUTO_TEST TestName)
 
     IF(${TestName} MATCHES "Widgets")
         ADD_DEPENDENCIES(Test_${TestName} ${VLCQT_WIDGETS})
-        TARGET_LINK_LIBRARIES(Test_${TestName} Qt5::Widgets ${VLCQT_WIDGETS})
+        TARGET_LINK_LIBRARIES(Test_${TestName} Qt${QT_VERSION}::Widgets ${VLCQT_WIDGETS})
     ENDIF()
 
     IF(STATIC)
@@ -80,7 +80,7 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_SUBDIRECTORY(core)
-ADD_SUBDIRECTORY(qml)
+#ADD_SUBDIRECTORY(qml)
 ADD_SUBDIRECTORY(widgets)
 
 ADD_SUBDIRECTORY(app)

@@ -251,6 +251,42 @@ public:
     */
     QMap<int, QString> tracks() const;
 
+     /*!
+        \brief Set new video adjust enable.
+        \param value new video adjust enable.
+    */
+    void setAdjustEnable(int value);
+
+    /*!
+        \brief Set new video adjust contrast.
+        \param value new video adjust contrast.
+    */
+    void setAdjustContrast(float value);
+
+    /*!
+        \brief Set new video adjust brightness.
+        \param value new video adjust brightness.
+    */
+    void setAdjustBrightness(float value);
+
+    /*!
+        \brief Set new video adjust hue.
+        \param value new video adjust hue.
+    */
+    void setAdjustHue(float value);
+    float getAdjustHue();
+    /*!
+        \brief Set new video adjust saturation.
+        \param value new video adjust saturation.
+    */
+    void setAdjustSaturation(float value);
+
+     /*!
+        \brief Set new video adjust gamma.
+        \param value new video adjust gamma.
+    */
+    void setAdjustGamma(float value);
+
 private:
     libvlc_media_player_t *_vlcMediaPlayer;
 };

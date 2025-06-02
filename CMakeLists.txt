@@ -61,7 +61,7 @@ ADD_SUBDIRECTORY(docs)
 #########
 # Tests #
 #########
-IF(QT_VERSION MATCHES 5 AND NOT MOBILE)
+IF(NOT MOBILE)
     ENABLE_TESTING(true)
     ADD_SUBDIRECTORY(tests)
 

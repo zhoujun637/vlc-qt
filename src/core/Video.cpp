@@ -399,3 +399,59 @@ QMap<int, QString> VlcVideo::tracks() const
 
     return tracks;
 }
+
+void VlcVideo::setAdjustEnable(int value)
+{
+    libvlc_video_set_adjust_int(_vlcMediaPlayer, libvlc_adjust_Enable, value);
+    VlcError::showErrmsg();
+}
+
+void VlcVideo::setAdjustContrast(float value)
+{
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Contrast, value);
+        VlcError::showErrmsg();
+    }
+}
+
+void VlcVideo::setAdjustBrightness(float value)
+{
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Brightness, value);
+        VlcError::showErrmsg();
+    }
+}
+
+void VlcVideo::setAdjustHue(float value)
+{
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Hue, value);
+        VlcError::showErrmsg();
+    }
+}
+
+float VlcVideo::getAdjustHue()
+{
+    float value = 0;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        value = libvlc_video_get_adjust_float(_vlcMediaPlayer, libvlc_adjust_Hue);
+        VlcError::showErrmsg();
+    }
+    return value;
+}
+
+void VlcVideo::setAdjustSaturation(float value)
+{
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Saturation, value);
+        VlcError::showErrmsg();
+    }
+}
+
+void VlcVideo::setAdjustGamma(float value)
+{
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Gamma, value);
+        VlcError::showErrmsg();
+    }
+}
