@@ -414,12 +414,32 @@ void VlcVideo::setAdjustContrast(float value)
     }
 }
 
+float VlcVideo::getAdjustContrast()
+{
+    float value = 0;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        value = libvlc_video_get_adjust_float(_vlcMediaPlayer, libvlc_adjust_Contrast);
+        VlcError::showErrmsg();
+    }
+    return value;
+}
+
 void VlcVideo::setAdjustBrightness(float value)
 {
     if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
         libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Brightness, value);
         VlcError::showErrmsg();
     }
+}
+
+float VlcVideo::getAdjustBrightness()
+{
+    float value = 0;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        value = libvlc_video_get_adjust_float(_vlcMediaPlayer, libvlc_adjust_Brightness);
+        VlcError::showErrmsg();
+    }
+    return value;
 }
 
 void VlcVideo::setAdjustHue(float value)
@@ -448,10 +468,50 @@ void VlcVideo::setAdjustSaturation(float value)
     }
 }
 
+float VlcVideo::getAdjustSaturation()
+{
+    float value = 0;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        value = libvlc_video_get_adjust_float(_vlcMediaPlayer, libvlc_adjust_Saturation);
+        VlcError::showErrmsg();
+    }
+    return value;
+}
+
 void VlcVideo::setAdjustGamma(float value)
 {
     if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
         libvlc_video_set_adjust_float(_vlcMediaPlayer, libvlc_adjust_Gamma, value);
         VlcError::showErrmsg();
     }
+}
+
+float VlcVideo::getAdjustGamma()
+{
+    float value = 0;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        value = libvlc_video_get_adjust_float(_vlcMediaPlayer, libvlc_adjust_Gamma);
+        VlcError::showErrmsg();
+    }
+    return value;
+}
+
+int VlcVideo::setSubtitleDelay(int64_t value)
+{
+    int ret = -1;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        ret = libvlc_video_set_spu_delay(_vlcMediaPlayer, value);
+        VlcError::showErrmsg();
+    }
+    return ret;
+}
+
+int64_t VlcVideo::getSubtitleDelay() const
+{
+    int64_t value = 0;
+    if (_vlcMediaPlayer && libvlc_media_player_has_vout(_vlcMediaPlayer)) {
+        value = libvlc_video_get_spu_delay(_vlcMediaPlayer);
+        VlcError::showErrmsg();
+    }
+    return value;
 }

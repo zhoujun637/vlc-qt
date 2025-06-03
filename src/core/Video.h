@@ -262,12 +262,14 @@ public:
         \param value new video adjust contrast.
     */
     void setAdjustContrast(float value);
+    float getAdjustContrast();
 
     /*!
         \brief Set new video adjust brightness.
         \param value new video adjust brightness.
     */
     void setAdjustBrightness(float value);
+    float getAdjustBrightness();
 
     /*!
         \brief Set new video adjust hue.
@@ -275,17 +277,27 @@ public:
     */
     void setAdjustHue(float value);
     float getAdjustHue();
+
     /*!
         \brief Set new video adjust saturation.
         \param value new video adjust saturation.
     */
     void setAdjustSaturation(float value);
+    float getAdjustSaturation();
 
      /*!
         \brief Set new video adjust gamma.
         \param value new video adjust gamma.
     */
     void setAdjustGamma(float value);
+    float getAdjustGamma();
+
+    /*!
+        \brief Set new video subtitle delay.
+        \param value delay ms.
+    */
+    int setSubtitleDelay(int64_t value);
+    int64_t getSubtitleDelay() const;
 
 private:
     libvlc_media_player_t *_vlcMediaPlayer;

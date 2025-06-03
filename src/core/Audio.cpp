@@ -255,3 +255,23 @@ void VlcAudio::setChannel(Vlc::AudioChannel channel)
         }
     }
 }
+
+int VlcAudio::setAudioDelay(int64_t value)
+{
+    int ret = -1;
+    if (_vlcMediaPlayer) {
+        ret = libvlc_audio_set_delay(_vlcMediaPlayer, value);
+        VlcError::showErrmsg();
+    }
+    return ret;
+}
+
+int64_t VlcAudio::getAudioDelay() const
+{
+    int value = 0;
+    if (_vlcMediaPlayer) {
+        value = libvlc_audio_get_delay(_vlcMediaPlayer);
+        VlcError::showErrmsg();
+    }
+    return value;
+}

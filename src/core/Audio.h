@@ -139,6 +139,13 @@ public:
     */
     Vlc::AudioChannel channel() const;
 
+    /*!
+        \brief Set audio delay.
+        \return result, 0 on success, -1 on error
+    */
+    int setAudioDelay(int64_t value);
+    int64_t getAudioDelay() const;
+
 signals:
     /*!
         \brief Signal sent when volume has changed.
