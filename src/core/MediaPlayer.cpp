@@ -445,6 +445,44 @@ float VlcMediaPlayer::sampleAspectRatio()
 #endif // LIBVLC_VERSION >= 0x020100
 }
 
+QVariantMap VlcMediaPlayer::getStatistics()
+{
+    if (!_vlcMediaPlayer)
+        return QVariantMap();
+    QVariantMap mapInfo;
+    libvlc_media_track_t **tracks;
+    unsigned tracksCount;
+    tracksCount = libvlc_media_tracks_get(_media->core(), &tracks);
+    if (tracksCount > 0) {
+        for (unsigned i = 0; i < tracksCount; i++) {
+            libvlc_media_track_t *track = tracks[i];
+            //video
+            if (track->i_type == libvlc_track_video && track->i_id == 0) {
+                libvlc_video_track_t *videoTrack = track->video;
+                mapInfo.insert("video_bit_rate", track->i_bitrate);
+                mapInfo.insert("video_frame_rate_num", videoTrack->i_frame_rate_num);
+                mapInfo.insert("video_frame_rate_den", videoTrack->i_frame_rate_den);
+                QString video_codec = "";
+                video_codec = libvlc_media_get_codec_description(track->i_type, track->i_codec);
+                mapInfo.insert("video_codec", video_codec);
+            }
+            //audio
+            if (track->i_type == libvlc_track_audio && track->i_id == 1) {
+                libvlc_audio_track_t *audioTrack = track->audio;
+                track->i_codec;
+                mapInfo.insert("audio_bit_rate", track->i_bitrate);
+                mapInfo.insert("audio_channels", audioTrack->i_channels);
+                mapInfo.insert("audio_sample_rate", audioTrack->i_rate);
+                QString audio_codec = "";
+                audio_codec = libvlc_media_get_codec_description(track->i_type, track->i_codec);
+                mapInfo.insert("audio_codec", audio_codec);
+            }
+        }
+        libvlc_media_tracks_release(tracks, tracksCount);
+    }
+    return mapInfo;
+}
+
 void VlcMediaPlayer::setPosition(float pos)
 {
     libvlc_media_player_set_position(_vlcMediaPlayer, pos);

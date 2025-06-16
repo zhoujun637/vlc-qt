@@ -22,6 +22,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QTimer>
+#include <QtCore/QVariantMap>
 
 #include <QtGui/qwindowdefs.h>
 
@@ -190,6 +191,11 @@ public:
     */
     float playbackRate();
 
+    /*!
+        \brief Get current media Statistics.
+        \return current media Statistics
+    */
+    QVariantMap getStatistics();
 public slots:
     /*! \brief Set the media position.
 
